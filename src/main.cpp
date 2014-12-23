@@ -1,6 +1,6 @@
 #include "WProgram.h"
 
-extern "C" int main(void)
+extern "C" int __attribute__ ((noinline)) main(void)
 {
 #if !defined(ARDUINO)
 
