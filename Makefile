@@ -2,7 +2,7 @@
 TARGET = $(notdir $(CURDIR))
 
 # The teensy version to use, 30 or 31
-TEENSY = 30
+TEENSY = 31
 
 # Set to 24000000, 48000000, or 96000000 to set CPU core speed
 TEENSY_CORE_SPEED = 48000000
@@ -49,7 +49,7 @@ COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
 #************************************************************************
 
 # CPPFLAGS = compiler options for C and C++
-CPPFLAGS = -Wall -g -Os -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -DF_CPU=$(TEENSY_CORE_SPEED) -Isrc -I$(COREPATH)
+CPPFLAGS = -Wall -Os -flto -ffunction-sections -fdata-sections -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -DF_CPU=$(TEENSY_CORE_SPEED) -Isrc -I$(COREPATH)
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
@@ -76,7 +76,11 @@ ifdef ARDUINO
 endif
 
 # linker options
-LDFLAGS = -Os -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -T$(LDSCRIPT)
+LDFLAGS = -Os -flto -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -T$(LDSCRIPT)
+
+# source files to ignore (to reduce size)
+IGNORE_C_FILES := teensy3/serial1.c teensy3/serial2.c teensy3/serial3.c
+IGNORE_CPP_FILES := teensy3/AudioStream.cpp teensy3/Tone.cpp teensy3/IntervalTimer.cpp teensy3/HardwareSerial1.cpp teensy3/HardwareSerial2.cpp teensy3/HardwareSerial3.cpp
 
 # additional libraries to link
 LIBS = -lm
@@ -100,6 +104,9 @@ INO_FILES := $(wildcard src/*.ino)
 L_INC := $(foreach lib,$(filter %/, $(wildcard $(LIBRARYPATH)/*/)), -I$(lib))
 
 SOURCES := $(C_FILES:.c=.o) $(CPP_FILES:.cpp=.o) $(INO_FILES:.ino=.o) $(TC_FILES:.c=.o) $(TCPP_FILES:.cpp=.o) $(LC_FILES:.c=.o) $(LCPP_FILES:.cpp=.o)
+SOURCES := $(filter-out $(IGNORE_C_FILES:.c=.o),$(SOURCES))
+SOURCES := $(filter-out $(IGNORE_CPP_FILES:.cpp=.o),$(SOURCES))
+
 OBJS := $(foreach src,$(SOURCES), $(BUILDDIR)/$(src))
 
 all: hex
