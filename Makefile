@@ -76,7 +76,7 @@ ifdef ARDUINO
 endif
 
 # linker options
-LDFLAGS = -Os -flto -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -T$(LDSCRIPT)
+LDFLAGS = -Os -flto --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -T$(LDSCRIPT)
 
 # source files to ignore (to reduce size)
 IGNORE_C_FILES := teensy3/serial1.c teensy3/serial2.c teensy3/serial3.c
