@@ -49,7 +49,7 @@ COMPILERPATH = /usr/bin
 #************************************************************************
 
 # CPPFLAGS = compiler options for C and C++
-CPPFLAGS = -Wall -Os -flto -ffunction-sections -fdata-sections -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -DF_CPU=$(TEENSY_CORE_SPEED) -Isrc -I$(COREPATH) -DTEENSY3_NO_HWSERIAL
+CPPFLAGS = -Wall -Os -flto -ffunction-sections -fdata-sections -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -DF_CPU=$(TEENSY_CORE_SPEED) -Isrc -I$(COREPATH) -DTEENSY3_NO_HWSERIAL -DTEENSY3_NO_INTERVAL_TIMER -DTEENSY3_NO_TONE -DTEENSY3_NO_AUDIOSTREAM
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
@@ -80,7 +80,7 @@ LDFLAGS = -Os -flto --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 -mthumb
 
 # source files to ignore (to reduce size)
 IGNORE_C_FILES :=
-IGNORE_CPP_FILES := $(COREPATH)/AudioStream.cpp $(COREPATH)/Tone.cpp $(COREPATH)/IntervalTimer.cpp $(COREPATH)/main.cpp
+IGNORE_CPP_FILES := $(COREPATH)/main.cpp
 
 # additional libraries to link
 LIBS = -lm
