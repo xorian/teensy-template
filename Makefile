@@ -36,7 +36,7 @@ else
 endif
 
 # path location for Teensy 3 core
-COREPATH = teensy3
+COREPATH = cores/teensy3
 
 # path location for Arduino libraries
 LIBRARYPATH = libraries
@@ -80,7 +80,7 @@ LDFLAGS = -Os -flto --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 -mthumb
 
 # source files to ignore (to reduce size)
 IGNORE_C_FILES := $(COREPATH)/serial1.c $(COREPATH)/serial2.c $(COREPATH)/serial3.c
-IGNORE_CPP_FILES := $(COREPATH)/AudioStream.cpp $(COREPATH)/Tone.cpp $(COREPATH)/IntervalTimer.cpp $(COREPATH)/HardwareSerial1.cpp $(COREPATH)/HardwareSerial2.cpp $(COREPATH)/HardwareSerial3.cpp
+IGNORE_CPP_FILES := $(COREPATH)/AudioStream.cpp $(COREPATH)/Tone.cpp $(COREPATH)/IntervalTimer.cpp $(COREPATH)/HardwareSerial1.cpp $(COREPATH)/HardwareSerial2.cpp $(COREPATH)/HardwareSerial3.cpp $(COREPATH)/main.cpp
 
 # additional libraries to link
 LIBS = -lm
