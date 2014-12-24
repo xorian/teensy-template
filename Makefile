@@ -79,8 +79,8 @@ endif
 LDFLAGS = -Os -flto --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -T$(LDSCRIPT)
 
 # source files to ignore (to reduce size)
-IGNORE_C_FILES := $(COREPATH)/serial1.c $(COREPATH)/serial2.c $(COREPATH)/serial3.c
-IGNORE_CPP_FILES := $(COREPATH)/AudioStream.cpp $(COREPATH)/Tone.cpp $(COREPATH)/IntervalTimer.cpp $(COREPATH)/HardwareSerial1.cpp $(COREPATH)/HardwareSerial2.cpp $(COREPATH)/HardwareSerial3.cpp $(COREPATH)/main.cpp
+IGNORE_C_FILES :=
+IGNORE_CPP_FILES := $(COREPATH)/AudioStream.cpp $(COREPATH)/Tone.cpp $(COREPATH)/IntervalTimer.cpp $(COREPATH)/main.cpp
 
 # additional libraries to link
 LIBS = -lm
